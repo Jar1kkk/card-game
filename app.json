@@ -7,7 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "cardgame",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
@@ -20,10 +19,6 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
-    },
-    "web": {
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
       "expo-router",
@@ -38,11 +33,17 @@
             "backgroundColor": "#000000"
           }
         }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Додаток використовує фото для аватара",
+          "cameraPermission": "Додаток використовує камеру для аватара"
+        }
       ]
     ],
     "experiments": {
-      "typedRoutes": true,
-      "reactCompiler": true
+      "typedRoutes": true
     }
   }
 }

@@ -1,24 +1,30 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { useEffect } from 'react'
+import { Stack } from 'expo-router'
+import * as SplashScreen from 'expo-splash-screen'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { initSounds } from '@/utils/sounds'
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  useEffect(() => {
+    SplashScreen.hideAsync()
+    initSounds()
+  }, [])
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+    <SafeAreaProvider>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="(auth)" />
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen
+          name="games"
+          options={{
+            presentation: 'fullScreenModal',
+          }}
+        />
       </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+    </SafeAreaProvider>
+  )
 }
